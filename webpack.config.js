@@ -4,7 +4,7 @@ const webpack = require("webpack");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
-const TerserPlugin = require('terser-webpack-plugin');
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const NsVueTemplateCompiler = require("nativescript-vue-template-compiler");
@@ -37,13 +37,13 @@ module.exports = env => {
         // the nsconfig.json configuration file
         // when bundling with `tns run android|ios --bundle`.
         appPath = "app",
-            appResourcesPath = "app/App_Resources",
+        appResourcesPath = "app/App_Resources",
 
-            // You can provide the following flags when running 'tns run android|ios'
-            snapshot, // --env.snapshot
-            production, // --env.production
-            report, // --env.report
-            hmr, // --env.hmr
+        // You can provide the following flags when running 'tns run android|ios'
+        snapshot, // --env.snapshot
+        production, // --env.production
+        report, // --env.report
+        hmr, // --env.hmr
     } = env;
 
     const externals = (env.externals || []).map((e) => { // --env.externals
@@ -130,10 +130,10 @@ module.exports = env => {
             },
             minimize: Boolean(production),
             minimizer: [
-                new TerserPlugin({
+                new UglifyJsPlugin({
                     parallel: true,
                     cache: true,
-                    terserOptions: {
+                    uglifyOptions: {
                         output: {
                             comments: false,
                         },
@@ -143,59 +143,57 @@ module.exports = env => {
                             'collapse_vars': platform !== "android",
                             sequences: platform !== "android",
                         },
-                        safari10: platform === "ios",
-                        keep_fnames: true,
                     },
                 }),
             ],
         },
         module: {
             rules: [{
-                    test: new RegExp(entryPath),
-                    use: [
-                        // Require all Android app components
-                        platform === "android" && {
-                            loader: "nativescript-dev-webpack/android-app-components-loader",
-                            options: { modules: appComponents },
-                        },
-
-                        {
-                            loader: "nativescript-dev-webpack/bundle-config-loader",
-                            options: {
-                                registerPages: true, // applicable only for non-angular apps
-                                loadCss: !snapshot, // load the application css if in debug mode
-                            },
-                        },
-                    ].filter(loader => Boolean(loader)),
-                },
-                {
-                    test: /\.css$/,
-                    use: [
-                        'nativescript-dev-webpack/style-hot-loader',
-                        'nativescript-dev-webpack/apply-css-loader.js',
-                        { loader: "css-loader", options: { minimize: false, url: false } },
-                    ],
-                },
-                {
-                    test: /\.scss$/,
-                    use: [
-                        'nativescript-dev-webpack/style-hot-loader',
-                        'nativescript-dev-webpack/apply-css-loader.js',
-                        { loader: "css-loader", options: { minimize: false, url: false } },
-                        "sass-loader",
-                    ],
-                },
-                {
-                    test: /\.js$/,
-                    loader: 'babel-loader',
-                },
-                {
-                    test: /\.vue$/,
-                    loader: "vue-loader",
-                    options: {
-                        compiler: NsVueTemplateCompiler,
+                test: new RegExp(entryPath),
+                use: [
+                    // Require all Android app components
+                    platform === "android" && {
+                        loader: "nativescript-dev-webpack/android-app-components-loader",
+                        options: { modules: appComponents },
                     },
+
+                    {
+                        loader: "nativescript-dev-webpack/bundle-config-loader",
+                        options: {
+                            registerPages: true, // applicable only for non-angular apps
+                            loadCss: !snapshot, // load the application css if in debug mode
+                        },
+                    },
+                ].filter(loader => Boolean(loader)),
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    'nativescript-dev-webpack/style-hot-loader',
+                    'nativescript-dev-webpack/apply-css-loader.js',
+                    { loader: "css-loader", options: { minimize: false, url: false } },
+                ],
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    'nativescript-dev-webpack/style-hot-loader',
+                    'nativescript-dev-webpack/apply-css-loader.js',
+                    { loader: "css-loader", options: { minimize: false, url: false } },
+                    "sass-loader",
+                ],
+            },
+            {
+                test: /\.js$/,
+                loader: 'babel-loader',
+            },
+            {
+                test: /\.vue$/,
+                loader: "vue-loader",
+                options: {
+                    compiler: NsVueTemplateCompiler,
                 },
+            },
             ],
         },
         plugins: [
@@ -217,9 +215,9 @@ module.exports = env => {
             }]),
             // Copy assets to out dir. Add your own globs as needed.
             new CopyWebpackPlugin([
-                { from: "fonts/**" },
-                { from: "**/*.+(jpg|png)" },
-                { from: "assets/**/*" },
+                { from: { glob: "fonts/**" } },
+                { from: { glob: "**/*.+(jpg|png|svg)" } },
+                { from: { glob: "assets/**/*" } },
             ], { ignore: [`${relative(appPath, appResourcesFullPath)}/**`] }),
             // Generate a bundle starter script and activate it in package.json
             new nsWebpack.GenerateBundleStarterPlugin([
