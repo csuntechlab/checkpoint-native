@@ -34,7 +34,7 @@ import register from "./Register"
 import app from "./App"
 export default {
     name: 'Login',
-    comoponents: {
+    components: {
         register,
         app
     },
