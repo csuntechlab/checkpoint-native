@@ -23,7 +23,6 @@
 		</GridLayout>
 	</Page>
 </template>
-<script src="http://172.28.30.210:8098"></script>
 <script>
 
 import navBottom from "./custom/navBottom";
@@ -32,13 +31,12 @@ import Settings from './Settings';
 import Alerts from './Alerts';
 import Progress from './Progress';
 import Timesheet from './Timesheet';
-
 import { mapGetters } from 'vuex';
+
 export default {
 	computed: {
 		...mapGetters(['selectedTab'])
 	},
-
 	components: {
 		navBottom,
 		Home,

@@ -3,40 +3,33 @@
 		<FlexboxLayout class="page">
 			<StackLayout class="form">
 				<Label class="header" text="Checkpoint" />
-
 				<StackLayout class="input-field" marginBottom="25">
 					<TextField class="input" hint="Email" keyboardType="email" autocorrect="false" autocapitalizationType="none" v-model="user.email"
 					 returnKeyType="next" fontSize="18" />
 					<StackLayout class="hr-light" />
 				</StackLayout>
-
 				<StackLayout class="input-field" marginBottom="25">
 					<TextField ref="password" class="input" hint="Password" secure="true" v-model="user.password" :returnKeyType="'done'"
 					fontSize="18" />
 					<StackLayout class="hr-light" />
 				</StackLayout>
-
-                 <Button :text="'Log In'" @tap="submit" class="btn btn-primary m-t-20" />
-				<!-- <Label v-show="isLoggingIn" text="Forgot your password?" class="login-label" @tap="forgotPassword" /> -->
+                 <Button text="Log In" @tap="submit" class="btn btn-primary m-t-20" />
 			</StackLayout>
 
-			<Label class="login-label sign-up-label" @tap="toggleRegistration">
+			<Label class="login-label sign-up-label" @tap="this.$navigateTo(Register)">
 	          <FormattedString>
-	            <Span :text="'Don’t have an account? '" />
-	            <Span :text="'Sign up'" class="bold" />
+	            <Span text="Don’t have an account?" />
+	            <Span text="Sign up" class="bold" />
 	          </FormattedString>
 	        </Label>
 		</FlexboxLayout>
 	</Page>
 </template>
 <script>
-import Register from "./Register"
-import App from "./App"
+import Register from "./Register";
+import App from "./App";
+
 export default {
-    components: {
-        Register,
-        App
-    },
     data() {
         return {
             isLoggingIn: true,
@@ -44,13 +37,9 @@ export default {
                 email: "",
                 password: "",
             }
-        };
+        };      
     },
     methods: {
-        toggleRegistration() {
-            this.$navigateTo(Register);
-        },
-
         submit() {
             if (!this.user.email || !this.user.password) {
                 this.alert(
@@ -60,12 +49,9 @@ export default {
             }
             this.login();
         },
-
 		login() {
-			
             this.$navigateTo(App);
         },
-
         alert(message) {
             return alert({
                 title: "Checkpoint",
@@ -73,7 +59,11 @@ export default {
                 message: message
             });
         }
-    }
+    },
+    components: {
+        Register,
+        App
+    },
 }
 </script>
 <style scoped>
@@ -88,12 +78,6 @@ export default {
     flex-grow: 2;
     vertical-align: middle;
 }
-
-/* .logo {
-    margin-bottom: 12;
-    height: 90;
-    font-weight: bold;
-} */
 
 .header {
     horizontal-align: center;
