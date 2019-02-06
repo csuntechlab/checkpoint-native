@@ -35,11 +35,10 @@
     
 </template>
 <script>
-import login from "./login"
+import Login from "./login"
 export default {
-    name: 'Register',
-    comoponents: {
-        login
+    components: {
+        Login
     },
     data() {
         return {
@@ -53,7 +52,7 @@ export default {
     },
     methods: {
         toggleLogin() {
-            this.$navigateTo(login);
+            this.$navigateTo(Login);
         },
 
         submit() {
@@ -88,9 +87,9 @@ export default {
             }
         },
 
-        focusPassword() {
-            this.$refs.password.nativeView.focus();
-        },
+        // focusPassword() {
+        //     this.$refs.password.nativeView.focus();
+        // },
 
         focusConfirmPassword() {
             if (!this.isLoggingIn) {
