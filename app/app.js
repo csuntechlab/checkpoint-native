@@ -1,11 +1,11 @@
 import Vue from 'nativescript-vue';
-import App from './components/App';
+import login from './components/Login';
 import { TNSFontIcon, fonticon } from 'nativescript-fonticon';
-import VueDevtools from 'nativescript-vue-devtools';
+// import VueDevtools from 'nativescript-vue-devtools';
 import store from './store';
 
-Vue.use(VueDevtools)
-Vue.config.silent = false;
+// Vue.use(VueDevtools)
+// Vue.config.silent = false;
 
 
 
@@ -19,5 +19,5 @@ Vue.filter('fonticon', fonticon);
 
 new Vue({
     store,
-    render: h => h('frame', [h(App)])
+    render: h => h('frame', [h(login)])
 }).$start();
