@@ -5,7 +5,7 @@ import { TNSFontIcon, fonticon } from 'nativescript-fonticon';
 import store from './store';
 
 // Vue.use(VueDevtools)
-// Vue.config.silent = false;
+Vue.config.silent = false;
 
 
 
