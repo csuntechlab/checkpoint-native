@@ -6,13 +6,13 @@
 
 				<StackLayout class="input-field" marginBottom="25">
 					<TextField class="input" hint="Email" keyboardType="email" autocorrect="false" autocapitalizationType="none" v-model="user.email"
-					 returnKeyType="next" @returnPress="focusPassword" fontSize="18" />
+					 returnKeyType="next" fontSize="18" />
 					<StackLayout class="hr-light" />
 				</StackLayout>
 
 				<StackLayout class="input-field" marginBottom="25">
 					<TextField ref="password" class="input" hint="Password" secure="true" v-model="user.password" :returnKeyType="'done'"
-					 @returnPress="focusConfirmPassword" fontSize="18" />
+					fontSize="18" />
 					<StackLayout class="hr-light" />
 				</StackLayout>
 
@@ -63,11 +63,7 @@ export default {
 
 		login() {
 			
-            this.$navigateTo(app);
-        },
-
-        focusPassword() {
-            this.$refs.password.nativeView.focus();
+            this.$navigateTo(App);
         },
 
         alert(message) {

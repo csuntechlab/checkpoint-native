@@ -6,13 +6,13 @@
 
 				<StackLayout class="input-field" marginBottom="20">
 					<TextField class="input" hint="Email" keyboardType="email" autocorrect="false" autocapitalizationType="none" v-model="user.email"
-					 returnKeyType="next" @returnPress="focusPassword" fontSize="18" />
+					 returnKeyType="next" fontSize="18" />
 					<StackLayout class="hr-light" />
 				</StackLayout>
 
 				<StackLayout class="input-field" marginBottom="20">
 					<TextField ref="password" class="input" hint="Password" secure="true" v-model="user.password" :returnKeyType="'next'"
-					 @returnPress="focusConfirmPassword" fontSize="18" />
+					fontSize="18" />
 					<StackLayout class="hr-light" />
 				</StackLayout>
 
@@ -73,7 +73,7 @@ export default {
             userService
                 .login(this.user)
                 .then(() => {
-                    this.$navigateTo(HomePage);
+                    this.$navigateTo(Home);
                 })
                 .catch(() => {
                     this.alert("Unfortunately we could not find your account.");
