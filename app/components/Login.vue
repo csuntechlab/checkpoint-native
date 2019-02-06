@@ -30,13 +30,12 @@
 	</Page>
 </template>
 <script>
-import register from "./Register"
-import app from "./App"
+import Register from "./Register"
+import App from "./App"
 export default {
-    name: 'Login',
     components: {
-        register,
-        app
+        Register,
+        App
     },
     data() {
         return {
@@ -49,7 +48,7 @@ export default {
     },
     methods: {
         toggleRegistration() {
-            this.$navigateTo(register);
+            this.$navigateTo(Register);
         },
 
         submit() {
