@@ -1,8 +1,9 @@
 {
   "android": {
-    "v8Flags": "--expose_gc"
+    "v8Flags": "--expose_gc",
+    "forceLog": true
   },
-  "main": "main",
-  "name": "checkpoint-native",
-  "version": "1.0.0"
+  "main": "app.js",
+  "name": "tns-template-vue",
+  "version": "3.2.0"
 }
