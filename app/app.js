@@ -23,9 +23,10 @@ import login from './components/Login';
 Vue.config.silent = false;
 TNSFontIcon.debug = false;
 
+axios.defaults.baseURL = 'http://localhost:8080';
+
 
 new Vue({
     store,
-    axios,
     render: h => h('frame', [h(login)])
 }).$start();

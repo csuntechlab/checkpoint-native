@@ -28,6 +28,7 @@
 <script>
 import Register from "./Register";
 import App from "./App";
+import { mapGetters, mapActions } from 'Vuex';
 
 export default {
     data() {
@@ -39,7 +40,16 @@ export default {
             }
         };      
     },
+    computed: {
+        ...mapGetters([
+            ''
+        ])
+    },
     methods: {
+        ...mapActions([
+            'postUserLogin'
+        ]),
+
         submit() {
             if (!this.user.email || !this.user.password) {
                 this.alert(
@@ -50,7 +60,11 @@ export default {
             this.login();
         },
 		login() {
-            this.$navigateTo(App);
+            this.postUserLogin({
+                username: this.user.email,
+                password: this.user.password
+            });
+            // this.$navigateTo(App);
         },
         alert(message) {
             return alert({
