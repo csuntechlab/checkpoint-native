@@ -16,7 +16,7 @@
                  <Button text="Log In" @tap="submit" class="btn btn-primary m-t-20" />
 			</StackLayout>
 
-			<Label class="login-label sign-up-label" @tap="this.$navigateTo(Register)">
+			<Label class="login-label sign-up-label" @tap="routeToRegister">
 	          <FormattedString>
 	            <Span text="Don’t have an account?" />
 	            <Span text="Sign up" class="bold" />
@@ -33,7 +33,6 @@ import { mapGetters, mapActions } from 'Vuex';
 export default {
     data() {
         return {
-            isLoggingIn: true,
             user: {
                 email: "",
                 password: "",
@@ -42,7 +41,7 @@ export default {
     },
     computed: {
         ...mapGetters([
-            ''
+            'user_token'
         ])
     },
     methods: {
@@ -57,14 +56,17 @@ export default {
                 );
                 return;
             }
-            this.login();
-        },
-		login() {
             this.postUserLogin({
                 username: this.user.email,
                 password: this.user.password
             });
-            // this.$navigateTo(App);
+            console.log(this.user_token);
+            if(this.user_token){
+                this.$navigateTo(App);
+            }
+        },
+        routeToRegister(){
+            this.$navigateTo(Register)
         },
         alert(message) {
             return alert({

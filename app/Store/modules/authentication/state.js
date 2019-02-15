@@ -6,6 +6,5 @@ export default{
     user: {
         user_name: null,
         user_email: null,
-        user_password: null
     }
 }

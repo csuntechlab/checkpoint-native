@@ -4,6 +4,12 @@
 			<StackLayout class="form">
 				<Label class="header" text="Checkpoint" />
 
+                <StackLayout class="input-field" marginBottom="20">
+					<TextField class="input" hint="Name" keyboardType="name" autocorrect="false" autocapitalizationType="none" v-model="user.name"
+					 returnKeyType="next" fontSize="18" />
+					<StackLayout class="hr-light" />
+				</StackLayout>
+
 				<StackLayout class="input-field" marginBottom="20">
 					<TextField class="input" hint="Email" keyboardType="email" autocorrect="false" autocapitalizationType="none" v-model="user.email"
 					 returnKeyType="next" fontSize="18" />
@@ -25,7 +31,7 @@
                  <Button :text="'Sign Up'" @tap="submit" class="btn btn-primary m-t-20" />
 			</StackLayout>
 
-			<Label class="login-label sign-up-label" @tap="$navigateBack" >
+			<Label class="login-label sign-up-label" @tap="this.$navigateBack" >
 	          <FormattedString>
 	            <Span :text="'Back to Login'" />
 	          </FormattedString>
@@ -35,7 +41,8 @@
     
 </template>
 <script>
-import Login from "./login"
+import Login from "./login";
+import { mapGetters, mapActions } from 'Vuex';
 export default {
     components: {
         Login
@@ -44,6 +51,7 @@ export default {
         return {
             isLoggingIn: true,
             user: {
+                name: "",
                 email: "",
                 password: "",
                 confirmPassword: ""
@@ -51,10 +59,10 @@ export default {
         };
     },
     methods: {
-        toggleLogin() {
-            this.$navigateTo(Login);
-        },
-
+        ...mapActions([
+            'postUserRegisteration'
+        ]),
+        
         submit() {
             if (!this.user.email || !this.user.password) {
                 this.alert(
@@ -62,22 +70,19 @@ export default {
                 );
                 return;
             }
-            if (this.isLoggingIn) {
-                this.login();
-            } else {
-                this.register();
-            }
-        },
 
-        login() {
-            userService
-                .login(this.user)
-                .then(() => {
-                    this.$navigateTo(Home);
-                })
-                .catch(() => {
-                    this.alert("Unfortunately we could not find your account.");
-                });
+            this.postUserRegisteration({
+                name: this.user.name,
+                email: this.user.email,
+                password: this.user.password,
+                password_confirmation: this.user.confirmPassword,
+            });
+            this.$navigateBack();
+            // if (this.isLoggingIn) {
+            //     this.login();
+            // } else {
+            //     this.register();
+            // }
         },
 
         register() {
@@ -85,11 +90,8 @@ export default {
                 this.alert("Your passwords do not match.");
                 return;
             }
+            
         },
-
-        // focusPassword() {
-        //     this.$refs.password.nativeView.focus();
-        // },
 
         focusConfirmPassword() {
             if (!this.isLoggingIn) {

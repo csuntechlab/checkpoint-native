@@ -20,10 +20,10 @@ import login from './components/Login';
 // DEVTOOLS CONFIGURATION
 // import VueDevtools from 'nativescript-vue-devtools';
 // Vue.use(VueDevtools)
-Vue.config.silent = false;
+Vue.config.silent = true;
 TNSFontIcon.debug = false;
 
-axios.defaults.baseURL = 'http://localhost:8080';
+axios.defaults.baseURL = 'https://www.sandbox.csun.edu/metalab/dev/checkpoint';
 
 
 new Vue({

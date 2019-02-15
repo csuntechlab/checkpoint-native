@@ -5,14 +5,26 @@ import Auth from '../../../api/authentication';
 
 
 export default {
-    postUserLogin ({ commit, dispatch }, payload) {
+    postUserLogin ({ commit }, payload) {
         Auth.postUserLoginAPI(
             payload,
-            (succ) => {
-                console.log(succ, 'succ');
-                commit(_authentication.LOGIN_USER, payload);
+            (success) => {
+                commit(_authentication.LOGIN_USER, success);
+            },
+            (error) => console.log(error),
+        );
+    },
+    postUserRegisteration({ commit, dispatch }, payload){
+        console.log("this is the payload" + payload.name);
+        Auth.postUserRegisterationAPI(
+            payload,
+            (success) => {
+                // console.log(success)
+                commit(_authentication.USER_REGISTRATION, success);
             },
             (error) => console.log(error),
         );
     }
   };
+
+  

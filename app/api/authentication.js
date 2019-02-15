@@ -1,44 +1,32 @@
 import axios from "axios"
 
-const protocol = "http://"
-const host = "localhost"
-const port = ":8080/"
-const url = protocol + host + port
-
 
 const postUserLoginAPI = (payload, success, error) => {
-    axios.get(`/api/login`).then(
-        response => success(response.data),
-        reponse => error(response)
+    axios.post(`api/login`, {
+        username: payload.username,
+        password: payload.password
+    }).then(
+        response => success(response),    
+    ).catch(
+        failure=>{ error(failure.response)}
     );
-    // let path = "api/login"
-    // console.log(url+path)
-    // axios.get(url + path, {
-    //     username: payload.username,
-    //     password: payload.password,
-    // }).then(
-    //     response => success(response),    
-    // ).catch(
-    //     failure=>{ error(failure.response.data.message)}
-    // );
 };
 const postUserRegisterationAPI = (payload, success, error) => {
-    let path = "api/register"
-    axios.get(url + path, {
-        name: payload.username,
+    axios.post(`api/register`, {
+        name: payload.name,
         email: payload.email,
         password: payload.password,
-        password_confirmation: payload.confirmPassword,
+        password_confirmation: payload.password_confirmation
     }).then(
-        response => success(response.data),    
+        response => success(response),    
     ).catch(
-        failure=>{ error(failure.response.data.message)}
+        failure=>{ error(failure.response)}
     );
 };
 const postUserLogoutAPI = (payload, success, error) => {
     let path = "api/logout"
     
-    window.axios.get(url + path, {
+    axios.get(url + path, {
         username: payload.username,
         password: payload.password,
     }).then(
@@ -47,6 +35,7 @@ const postUserLogoutAPI = (payload, success, error) => {
         failure=>{ error(failure.response.data.message)}
     );
 };
+
 // const fetchForgetPassword = (payload, success, error) => {
 //     window.axios.get().then(
 //         response => success(response.data),    
