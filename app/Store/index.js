@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue from 'nativescript-vue';
 import Vuex from 'vuex';
 
 //module imports
