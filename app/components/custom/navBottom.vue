@@ -2,8 +2,7 @@
 
     <GridLayout class="navBottom" height="50" width="100%" row="3" rows="auto"
         columns="auto,auto,auto,auto, auto">
-        <GridLayout :class="selectedTab === 'Progress' ? 'active' : ''" @tap="routeToTab('Progress')" rows="*,auto"
-            cols="auto" class="nav" col="0" row="0" width="20%">
+        <GridLayout :class="selectedTab === 'Progress' ? 'active' : ''" @tap="routeToTab('Progress')" rows="*,auto" cols="auto" class="nav" col="0" row="0" width="20%">
             <Image :class="selectedTab === 'Progress' ? 'active' : ''" row="0" class="navIcon" :src="'~/assets/images/thermometer.png'" />
             <Label row="1" v-show="selectedTab === 'Progress'" text="Progress" class="navText"></Label>
         </GridLayout>

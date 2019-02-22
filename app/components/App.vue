@@ -1,27 +1,27 @@
 <template>
-	<Page actionBarHidden="true" backgroundSpanUnderStatusBar="true">
-		<GridLayout rows="auto,auto,*,auto" columns="auto">
-			<GridLayout 
-					row="0" 
-					ref="navStatusBar" 
-					class="navStatusBar" 
-					verticalAlignment="top" 
-					height="40"
-			 		width="100%" 
-					rows="auto" 
-					columns="*,auto,auto,auto">
-				<Label col="0" row="0" text="Checkpoint" horizontalAlignment="center" class="status-title"></Label>
-			</GridLayout>
-			<GridLayout row="1">
-				<Home v-if="selectedTab === 'Home'"></Home>
-				<Alerts v-if="selectedTab === 'Alerts'"></Alerts>
-				<Progress v-if="selectedTab === 'Progress'"></Progress>
-				<Timesheet v-if="selectedTab === 'Timesheet'"></Timesheet>
-				<Settings v-if="selectedTab === 'Settings'"></Settings>
-			</GridLayout>
-			<navBottom row="3" />
+<Page enableSwipeBackNavigation="false" actionBarHidden="true">
+	<GridLayout rows="auto,auto,*,auto" columns="auto">
+		<GridLayout 
+				row="0" 
+				ref="navStatusBar" 
+				class="navStatusBar" 
+				verticalAlignment="top" 
+				height="40"
+				width="100%" 
+				rows="auto" 
+				columns="*,auto,auto,auto">
+			<Label col="0" row="0" text="Checkpoint" horizontalAlignment="center" class="status-title"></Label>
 		</GridLayout>
-	</Page>
+		<GridLayout row="1">
+			<Home v-if="selectedTab === 'Home'"></Home>
+			<Alerts v-if="selectedTab === 'Alerts'"></Alerts>
+			<Progress v-if="selectedTab === 'Progress'"></Progress>
+			<Timesheet v-if="selectedTab === 'Timesheet'"></Timesheet>
+			<Settings v-if="selectedTab === 'Settings'"></Settings>
+		</GridLayout>
+		<navBottom row="3" />
+	</GridLayout>
+</Page>
 </template>
 <script>
 

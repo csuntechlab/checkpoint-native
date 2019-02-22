@@ -4,7 +4,7 @@
 export default{
     user_token: null,
     user: {
-        user_name: null,
-        user_email: null,
+        name: null,
+        email: null,
     }
 }

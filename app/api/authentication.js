@@ -7,8 +7,7 @@ const postUserLoginAPI = (payload, success, error) => {
         password: payload.password
     }).then(
         response => success(response),    
-    ).catch(
-        failure=>{ error(failure.response)}
+        response=> error(response)
     );
 };
 const postUserRegisterationAPI = (payload, success, error) => {
@@ -18,31 +17,22 @@ const postUserRegisterationAPI = (payload, success, error) => {
         password: payload.password,
         password_confirmation: payload.password_confirmation
     }).then(
-        response => success(response),    
-    ).catch(
-        failure=>{ error(failure.response)}
+        response => success(response),
+        response => error(response), 
     );
 };
-const postUserLogoutAPI = (payload, success, error) => {
-    let path = "api/logout"
-    
-    axios.get(url + path, {
-        username: payload.username,
-        password: payload.password,
+const postUserLogoutAPI = (payload, success, error) => {    
+    axios.post(`api/logout`, null, {
+        headers: {
+            'content-type': 'application/x-www-form-urlencoded',
+            'accept': 'application/json',
+            'authorization': payload
+        },
     }).then(
-        response => success(response.data),    
-    ).catch(
-        failure=>{ error(failure.response.data.message)}
+        response => success(response),
+        response => error(response),    
     );
 };
-
-// const fetchForgetPassword = (payload, success, error) => {
-//     window.axios.get().then(
-//         response => success(response.data),    
-//     ).catch(
-//         failure=>{ error(failure.response.data.message)}
-//     );
-// };
 
 export default{
     postUserLoginAPI,
