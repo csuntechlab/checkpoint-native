@@ -1,3 +1,4 @@
 export default {
-  selectedTab: 'Home'
+  selectedTab: 'Home',
+  selectedAuthTab: 'Login',
 };
