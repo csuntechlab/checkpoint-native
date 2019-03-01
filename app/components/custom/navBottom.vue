@@ -41,31 +41,3 @@
     };
 </script>
 
-<style>
-    .nav {
-        height: 100%;
-        width: 100%;
-    }
-
-    .nav.active {
-        background-color: #dddddd;
-    }
-
-    .navIcon {
-        horizontal-align: center;
-        vertical-align: center;
-        height: 20
-    }
-
-    .navIcon.active {
-        vertical-align: bottom;
-    }
-
-    .navText {
-        margin-bottom: 2;
-        font-size: 12;
-        /* color: #c43776; */
-        color: #282828;
-        horizontal-align: center;
-    }
-</style>

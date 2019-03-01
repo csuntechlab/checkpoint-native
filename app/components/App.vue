@@ -1,25 +1,17 @@
 <template>
 <Page enableSwipeBackNavigation="false" actionBarHidden="true">
-	<GridLayout rows="auto,auto,*,auto" columns="auto">
-		<GridLayout 
-				row="0" 
-				ref="navStatusBar" 
-				class="navStatusBar" 
-				verticalAlignment="top" 
-				height="40"
-				width="100%" 
-				rows="auto" 
-				columns="*,auto,auto,auto">
-			<Label col="0" row="0" text="Checkpoint" horizontalAlignment="center" class="status-title"></Label>
-		</GridLayout>
-		<GridLayout row="1">
+	<GridLayout>
+		<DockLayout>
+			<Label text="Checkpoint" dock="top" horizontalAlignment="center" class="status-title navStatusBar"></Label>
 			<Home v-if="selectedTab === 'Home'"></Home>
 			<Alerts v-if="selectedTab === 'Alerts'"></Alerts>
 			<Progress v-if="selectedTab === 'Progress'"></Progress>
 			<Timesheet v-if="selectedTab === 'Timesheet'"></Timesheet>
 			<Settings v-if="selectedTab === 'Settings'"></Settings>
-		</GridLayout>
-		<navBottom row="3" />
+		</DockLayout>
+		<DockLayout>
+			<navBottom verticalAlignment="bottom" dock="bottom" />
+		</DockLayout>
 	</GridLayout>
 </Page>
 </template>
@@ -47,19 +39,3 @@ export default {
 	},
 };
 </script>
-
-<style>
-
-.navStatusBar{
-	background-color: #7dadb8;
-}
-
-.status-title {
-	color: white;
-	font-size: 18;
-	margin-left: 15;
-	margin-top: 8;
-	horizontal-align: left;
-	vertical-align: center;
-}
-</style>
