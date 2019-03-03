@@ -62,7 +62,7 @@ module.exports = env => {
     const config = {
         mode: mode,
         context: appFullPath,
-        externals,
+        externals: ["net"],
         watchOptions: {
             ignored: [
                 appResourcesFullPath,
