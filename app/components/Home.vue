@@ -1,36 +1,57 @@
 <template>
-<AbsoluteLayout>
-  <DockLayout marginBottom="15%" width="100%" backgroundColor="gray" stretchLastChild="true">
-    <GridLayout rows="*, 2*" columns="2*, 2*" dock="bottom" style="border-top-right-radius:25;border-top-left-radius:25;" height="50%" width="100%" backgroundColor="white">
-      <Label text="Clock In" col="0" row="0" textAlignment="center"/>
-      <Label @itemTap="check" text="Clock Out" col="2" row="0" textAlignment="center"/>
-      <Label :text="timeIn" col="0" row="1" textAlignment="center"/>
-      <Label :text="timeOut" col="2" row="1" textAlignment="center"/>
-    </GridLayout>
-      <Button @itemTap="clockIn()" class="btn btn-primary m-t-20"></Button>
+<GridLayout backgroundColor="gray" columns="*" rows="*,*">
+  <Button @tap="clockIt" class="clock" :text="clocktext"/>
+  <!-- <Button v-else @tap="clockOut" class="clock" :text="clocktext"/> -->
 
-  </DockLayout>
-</AbsoluteLayout>
+  <GridLayout backgroundColor="white" col="0" row="1" columns="*,*,*" rows="*,*">
+    <Label text="Clock In" col="0" row="0" textAlignment="center"/>
+    <Label text="Clock Out" col="2" row="0" textAlignment="center"/>
+    <!-- <Label :text="timein" col="0" row="1" colSpan="2" textAlignment="center"/>
+    <Label :text="timeout" col="2" row="1" colSpan="2" textAlignment="center"/> -->
+    <ListView row="1" col="0" separatorColor="transparent" for="time in times">
+      <v-template>
+        <Label :text="time" col="0" row="1" colSpan="1"/>
+      </v-template>
+      <!-- <v-template if="$odd"> 
+         <Label text="move" col="2" row="1" colSpan="1"/> 
+      </v-template> -->
+    </ListView>
+    <ListView row="1" col="2" for="time in times" separatorColor="transparent">
+      <v-template>
+        <Label text="move" col="2" row="1" colSpan="1"/> 
+      </v-template>
+    </ListView>
+  </GridLayout>
+</GridLayout>
 </template>
-<script src="http://localhost:8098"></script>
 <script>
 import { mapGetters, mapActions } from 'Vuex';
 export default {
   data() {
     return {
-      timeIn: 0,
-      timeOut: 0,
+      times: [],
       clocktext: "Clock In" 
     };
   },
   
   methods: {
-    check(){console.log("does it work")},
-    clockIn(self){
-      console.log("here");
-      // var date = new Date();
-      // date = date.addHours(14);
-      // this.timeIn = new Date(date.toUTCString());
+    clockIt(){
+      if(this.clocktext == "Clock In"){
+        this.clocktext = "Clock Out";
+      } else {
+        this.clocktext = "Clock In";
+      }
+      var date = new Date();
+      this.times.push(new Date(date.toUTCString()));
+    },
+    // clockOut(){
+    //   var date = new Date();
+    //   time.push(new Date(date.toUTCString()));
+    //   this.clocktext = "Clock In";
+    // }
+    onItemTap(event) {
+      console.log(event.index)
+      console.log(event.item)
     }
 
   }

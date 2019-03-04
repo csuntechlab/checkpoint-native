@@ -1,17 +1,15 @@
 <template>
 <Page enableSwipeBackNavigation="false" actionBarHidden="true">
-	<GridLayout>
-		<DockLayout>
-			<Label text="Checkpoint" dock="top" horizontalAlignment="center" class="status-title navStatusBar"></Label>
+	<GridLayout rows="auto,auto,*,auto" columns="auto">
+		<Label col="0" row="0" text="Checkpoint" horizontalAlignment="center" class="status-title"></Label>
+		<GridLayout row="1" col="0" colSpan="1" rowSpan="2">
 			<Home v-if="selectedTab === 'Home'"></Home>
 			<Alerts v-if="selectedTab === 'Alerts'"></Alerts>
 			<Progress v-if="selectedTab === 'Progress'"></Progress>
 			<Timesheet v-if="selectedTab === 'Timesheet'"></Timesheet>
 			<Settings v-if="selectedTab === 'Settings'"></Settings>
-		</DockLayout>
-		<DockLayout>
-			<navBottom verticalAlignment="bottom" dock="bottom" />
-		</DockLayout>
+		</GridLayout>
+		<navBottom row="3"/>
 	</GridLayout>
 </Page>
 </template>
