@@ -1,9 +1,9 @@
 <template>
 <Page enableSwipeBackNavigation="false" actionBarHidden="true">
-	<GridLayout rows="auto,auto,*,auto" columns="auto">
+	<GridLayout rows="auto,*,*,auto" columns="*">
 		<Label col="0" row="0" text="Checkpoint" horizontalAlignment="center" class="status-title"></Label>
 		<GridLayout row="1" col="0" colSpan="1" rowSpan="2">
-			<Home v-if="selectedTab === 'Home'"></Home>
+			<Home v-show="selectedTab === 'Home'"></Home>
 			<Alerts v-if="selectedTab === 'Alerts'"></Alerts>
 			<Progress v-if="selectedTab === 'Progress'"></Progress>
 			<Timesheet v-if="selectedTab === 'Timesheet'"></Timesheet>
@@ -25,7 +25,7 @@ import { mapGetters } from 'vuex';
 
 export default {
 	computed: {
-		...mapGetters(['selectedTab'])
+		...mapGetters(['selectedTab','user','user_token'])
 	},
 	components: {
 		navBottom,

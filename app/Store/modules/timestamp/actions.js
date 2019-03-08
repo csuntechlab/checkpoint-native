@@ -1,19 +1,17 @@
-//AUTH ACTIONS
+//CLOCK MUTATION TYPES
 import _timestamp from '../../mutation-types/timestamp';
-//AUTH APIS
-import Auth from '../../../api/timestamp';
-
+//CLOCK APIS
+import Stamp from '../../../api/timestamp';
 
 export default {
-    postUserLogin (context, payload) {
-        Auth.postUserLoginAPI(
+    postUserClockIn (context, payload) {
+        Stamp.postUserClockInAPI(
             payload,
             (success) => {
-                context.commit(_authentication.LOGIN_USER, success.data.access_token);
-                context.commit(_authentication.STORE_USER_TOKEN, success.data.access_token);
-
+                context.commit(_timestamp.CLOCK_IN, success);
+                context.commit(_timestamp.UPDATE_USER_STATUS, success);
             },
-            (error) => console.log("Login error in actions " + error),
+            (error) => console.log("Clock-In error in actions " + error),
         );
     },
   };

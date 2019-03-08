@@ -1,8 +1,10 @@
-const ROUTE_TO_TAB = 'navigation/ROUTE_TO_TAB';
-const ROUTE_TO_AUTH = 'navigation/ROUTE_TO_AUTH';
+const CLOCK_IN = 'timestamp/CLOCK_IN';
+const CLOCK_OUT = 'timestamp/CLOCK_OUT';
+const UPDATE_USER_STATUS = 'timestamp/UPDATE_USER_STATUS';
 
 
 export default {
-  ROUTE_TO_TAB,
-  ROUTE_TO_AUTH
+  CLOCK_IN,
+  CLOCK_OUT,
+  UPDATE_USER_STATUS
 }

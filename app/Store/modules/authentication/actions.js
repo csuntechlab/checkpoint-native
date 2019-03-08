@@ -11,7 +11,6 @@ export default {
             (success) => {
                 context.commit(_authentication.LOGIN_USER, success.data.access_token);
                 context.commit(_authentication.STORE_USER_TOKEN, success.data.access_token);
-
             },
             (error) => console.log("Login error in actions " + error),
         );

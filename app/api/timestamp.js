@@ -1,15 +1,25 @@
 import axios from 'axios';
-import state from '../Store/modules/timestamp/state';
-import state from '../Store/modules/authentication/state';
 
 
-const postUserClockIn = (payload, success, error) => {
-    axios.post(`api/clock/in`, {
-        headers: { Authorization: "Bearer " + state.user_token },
-        timestamp: payload.timein,
-        location: payload.location
-    }).then(
-        response => success(response),    
-        response=> error(response)
+const postUserClockInAPI = (payload, success, error) => {
+    console.log("api " + payload.time);
+    let data = {
+        timeStamp: "2019-02-01 06:30:44",
+        location: "check"
+      };
+      
+    let header = {
+            'Content-type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json',
+            'Authorization': "Bearer " + payload.auth_token
+      };
+    axios.post(`api/clock/in`, data, {headers : header})
+    .then(
+        response => success(console.log(response)),    
+        response=> error(console.log(response))
     );
 };
+
+export default {
+    postUserClockInAPI,
+}

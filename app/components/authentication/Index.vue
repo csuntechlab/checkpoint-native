@@ -8,6 +8,7 @@
 
 
 </template>
+<script src="http://localhost:8098"></script>
 <script>
 import Login from './Login';
 import Register from './Register';

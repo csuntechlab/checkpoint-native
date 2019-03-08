@@ -1,58 +1,42 @@
 <template>
 <GridLayout backgroundColor="gray" columns="*" rows="*,*">
-  <Button @tap="clockIt" class="clock" :text="clocktext"/>
-  <!-- <Button v-else @tap="clockOut" class="clock" :text="clocktext"/> -->
+  <Button @tap="clock" class="clock" :text="user_log.status"/>
 
   <GridLayout backgroundColor="white" col="0" row="1" columns="*,*,*" rows="*,*">
     <Label text="Clock In" col="0" row="0" textAlignment="center"/>
     <Label text="Clock Out" col="2" row="0" textAlignment="center"/>
-    <!-- <Label :text="timein" col="0" row="1" colSpan="2" textAlignment="center"/>
-    <Label :text="timeout" col="2" row="1" colSpan="2" textAlignment="center"/> -->
-    <ListView row="1" col="0" separatorColor="transparent" for="time in times">
+    <ListView row="1" col="0" separatorColor="transparent">
       <v-template>
-        <Label :text="time" col="0" row="1" colSpan="1"/>
-      </v-template>
-      <!-- <v-template if="$odd"> 
-         <Label text="move" col="2" row="1" colSpan="1"/> 
-      </v-template> -->
-    </ListView>
-    <ListView row="1" col="2" for="time in times" separatorColor="transparent">
-      <v-template>
-        <Label text="move" col="2" row="1" colSpan="1"/> 
+        <Label :text="user_log.time_in" col="0" row="1" colSpan="1"/>
+        <Label :text="user_log.time_out" col="2" row="1" colSpan="1"/>
       </v-template>
     </ListView>
   </GridLayout>
 </GridLayout>
 </template>
+
 <script>
 import { mapGetters, mapActions } from 'Vuex';
 export default {
   data() {
     return {
-      times: [],
-      clocktext: "Clock In" 
     };
   },
-  
+  computed: {
+    ...mapGetters(['user_log','user', 'user_token']),
+    
+	},
   methods: {
-    clockIt(){
-      if(this.clocktext == "Clock In"){
-        this.clocktext = "Clock Out";
-      } else {
-        this.clocktext = "Clock In";
-      }
+    ...mapActions(['postUserClockIn']),
+    clock(){
       var date = new Date();
-      this.times.push(new Date(date.toUTCString()));
+      var testDate = new Date(date.toUTCString());
+      this.postUserClockIn({
+        time: testDate,
+        location: "Fake Location",
+        auth_token: this.user_token,
+      })
     },
-    // clockOut(){
-    //   var date = new Date();
-    //   time.push(new Date(date.toUTCString()));
-    //   this.clocktext = "Clock In";
-    // }
-    onItemTap(event) {
-      console.log(event.index)
-      console.log(event.item)
-    }
 
   }
 };

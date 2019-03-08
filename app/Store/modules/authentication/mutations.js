@@ -22,5 +22,5 @@ export default {
 
     [_authentication.STORE_USER_TOKEN] (state, payload){
         localStorage.setItem('Auth_Token', payload);
-    },
+    }
 }

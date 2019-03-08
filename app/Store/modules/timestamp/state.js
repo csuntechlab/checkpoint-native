@@ -1,10 +1,9 @@
-//AUTH STATE
-//setting token and user values, initial valuse are null
+//CLOCK STATE
 
 export default{
-    user_state: {
-        user_status: null,
-        user_clock_in: [],
-        user_clock_out: []
+    user_log: {
+        status: "Clock In",
+        time_in: [],
+        time_out: [],
     }
 }

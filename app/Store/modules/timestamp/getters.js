@@ -1,5 +1,4 @@
-//AUTH GETTERS
-
+//CLOCK GETTERS
 export default {
-    user_state: state => state.user_state,
+    user_log: state => state.user_log,
 }
