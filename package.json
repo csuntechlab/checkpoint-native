@@ -2,7 +2,7 @@
   "name": "checkpoint-native",
   "version": "1.0.0",
   "description": "A native application built with NativeScript-Vue",
-  "author": "checkpoint@metalab.csun.edu",
+  "author": "checkpoint-team@metalab.csun.edu",
   "license": "MIT",
   "nativescript": {
     "id": "org.metalab.application",
