@@ -1,25 +1,29 @@
-import axios from 'axios';
-
+import axios from './config';
 
 const postUserClockInAPI = (payload, success, error) => {
-    console.log("api " + payload.time);
-    let data = {
-        timeStamp: "2019-02-01 06:30:44",
-        location: "check"
+    const data = {
+        timeStamp: payload.timeStamp,
       };
-      
-    let header = {
-            'Content-type': 'application/x-www-form-urlencoded',
-            'Accept': 'application/json',
-            'Authorization': "Bearer " + payload.auth_token
-      };
-    axios.post(`api/clock/in`, data, {headers : header})
+    axios.API.post(`api/clock/in`, data)
     .then(
-        response => success(console.log(response)),    
-        response=> error(console.log(response))
-    );
+        response => success(response),
+        response => error(response),
+    ); 
+};
+
+const postUserClockOutAPI = (payload, success, error) => {
+    const data = {
+        timeStamp: payload.timeStamp,
+        logUuid: payload.logUuid
+    };
+    axios.API.post(`api/clock/out`, data)
+    .then(
+        response => success(response),
+        response => error(response),
+    ); 
 };
 
 export default {
     postUserClockInAPI,
+    postUserClockOutAPI
 }

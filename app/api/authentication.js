@@ -1,34 +1,33 @@
-import axios from "axios";
-
+//Axios import
+import axios from './config';
 
 const postUserLoginAPI = (payload, success, error) => {
-    axios.post(`api/login`, {
+    const data = {
         username: payload.username,
         password: payload.password
-    }).then(
+    };
+    axios.API.post(`api/login`, data)
+    .then(
         response => success(response),    
         response=> error(response)
     );
 };
 const postUserRegisterationAPI = (payload, success, error) => {
-    axios.post(`api/register`, {
+    const data = {
         name: payload.name,
         email: payload.email,
         password: payload.password,
         password_confirmation: payload.password_confirmation
-    }).then(
+    };
+    axios.API.post(`api/register`, data)
+    .then(
         response => success(response),
         response => error(response), 
     );
 };
-const postUserLogoutAPI = (payload, success, error) => {    
-    axios.post(`api/logout`, null, {
-        headers: {
-            'content-type': 'application/x-www-form-urlencoded',
-            'accept': 'application/json',
-            'authorization': payload
-        },
-    }).then(
+const postUserLogoutAPI = (success, error) => {    
+    axios.API.post(`api/logout`, null)
+    .then(
         response => success(response),
         response => error(response),    
     );
