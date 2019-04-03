@@ -6,5 +6,6 @@ export default{
         log_id: localStorage.getItem('Log_uuid'),
         time_in: [],
         time_out: [],
+        approved_locations:[],
     }
 }

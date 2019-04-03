@@ -1,6 +1,7 @@
 import axios from './config';
 
 const postUserClockInAPI = (payload, success, error) => {
+    console.log(payload.timeStamp);
     const data = {
         timeStamp: payload.timeStamp,
       };
