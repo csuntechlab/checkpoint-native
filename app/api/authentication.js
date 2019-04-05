@@ -3,7 +3,7 @@ import axios from './config';
 
 const postUserLoginAPI = (payload, success, error) => {
     const data = {
-        username: payload.username,
+        email: payload.username,
         password: payload.password
     };
     axios.API.post(`api/login`, data)
