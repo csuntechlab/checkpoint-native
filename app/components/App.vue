@@ -1,25 +1,15 @@
 <template>
 <Page enableSwipeBackNavigation="false" actionBarHidden="true">
-	<GridLayout rows="auto,auto,*,auto" columns="auto">
-		<GridLayout 
-				row="0" 
-				ref="navStatusBar" 
-				class="navStatusBar" 
-				verticalAlignment="top" 
-				height="40"
-				width="100%" 
-				rows="auto" 
-				columns="*,auto,auto,auto">
-			<Label col="0" row="0" text="Checkpoint" horizontalAlignment="center" class="status-title"></Label>
-		</GridLayout>
-		<GridLayout row="1">
-			<Home v-if="selectedTab === 'Home'"></Home>
+	<GridLayout rows="auto,*,*,auto" columns="*">
+		<Label col="0" row="0" text="Checkpoint" horizontalAlignment="center" class="status-title"></Label>
+		<GridLayout row="1" col="0" colSpan="1" rowSpan="2">
+			<Home v-show="selectedTab === 'Home'"></Home>
 			<Alerts v-if="selectedTab === 'Alerts'"></Alerts>
 			<Progress v-if="selectedTab === 'Progress'"></Progress>
 			<Timesheet v-if="selectedTab === 'Timesheet'"></Timesheet>
 			<Settings v-if="selectedTab === 'Settings'"></Settings>
 		</GridLayout>
-		<navBottom row="3" />
+		<navBottom row="3"/>
 	</GridLayout>
 </Page>
 </template>
@@ -35,7 +25,7 @@ import { mapGetters } from 'vuex';
 
 export default {
 	computed: {
-		...mapGetters(['selectedTab'])
+		...mapGetters(['selectedTab','user','user_token'])
 	},
 	components: {
 		navBottom,
@@ -47,19 +37,3 @@ export default {
 	},
 };
 </script>
-
-<style>
-
-.navStatusBar{
-	background-color: #7dadb8;
-}
-
-.status-title {
-	color: white;
-	font-size: 18;
-	margin-left: 15;
-	margin-top: 8;
-	horizontal-align: left;
-	vertical-align: center;
-}
-</style>

@@ -1,6 +1,5 @@
 //Instance imports
 import Vue from 'nativescript-vue';
-import axios from 'axios';
 import localstorage from 'nativescript-localstorage';
 //Font imports
 import { TNSFontIcon, fonticon } from 'nativescript-fonticon';
@@ -12,7 +11,10 @@ TNSFontIcon.loadCss();
 Vue.filter('fonticon', fonticon);
 
 //Store import
-import store from './store';
+import store from './Store';
+
+//Axios import
+import axios from './api';
 
 //Main components
 import Index from './components/authentication/Index';
@@ -24,14 +26,14 @@ Vue.use(VueDevtools)
 Vue.config.silent = true;
 TNSFontIcon.debug = false;
 
-axios.defaults.baseURL = 'https://www.sandbox.csun.edu/metalab/dev/checkpoint';
-
-
 new Vue({
     store,
     localstorage,
+    axios,
     created() {
         store.dispatch('getUserTokenFromLocalStorage');
+        store.dispatch('setStatusFromLocalStorage');
     },
     render: h => h('frame', [h(store.getters.user_token ? App : Index)])
 }).$start();
+
