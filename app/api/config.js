@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API  = axios.create({
     //axios configs
-    baseURL: 'https://www.sandbox.csun.edu/metalab/dev/checkpoint/'
+    baseURL: 'https://www.sandbox.csun.edu/metalab/demo/checkpoint/'
 
 })
 
