@@ -13,11 +13,13 @@ const postUserLoginAPI = (payload, success, error) => {
     );
 };
 const postUserRegisterationAPI = (payload, success, error) => {
+    //data will be reformated to just equal payload later
     const data = {
         name: payload.name,
         email: payload.email,
         password: payload.password,
-        password_confirmation: payload.password_confirmation
+        password_confirmation: payload.password_confirmation,
+        invitation_code: payload.invitation_code
     };
     axios.API.post(`api/register`, data)
     .then(

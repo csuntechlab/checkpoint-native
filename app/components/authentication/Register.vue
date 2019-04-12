@@ -20,9 +20,15 @@
                 <StackLayout class="hr-light" />
             </StackLayout>
 
-            <StackLayout class="input-field">
+            <StackLayout class="input-field" marginBottom="20">
                 <TextField ref="confirmPassword" class="input" hint="Confirm password" secure="true" v-model="form.confirmPassword" returnKeyType="done"
                     fontSize="18" />
+                <StackLayout class="hr-light" />
+            </StackLayout>
+
+            <StackLayout class="input-field">
+                <TextField class="input" hint="Authentication Code" autocorrect="false" autocapitalizationType="none" v-model="form.email"
+                    returnKeyType="next" fontSize="18" />
                 <StackLayout class="hr-light" />
             </StackLayout>
 
@@ -46,7 +52,8 @@ export default {
                 name: "",
                 email: "",
                 password: "",
-                confirmPassword: ""
+                confirmPassword: "",
+                inviteCode: ""
             }
         };
     },
@@ -74,11 +81,18 @@ export default {
                 );
                 return;
             }
+            if (this.form.activationCode.length != 6){
+                this.alert(
+                    "Not a valid Activation Code"
+                );
+                return;
+            }
             this.postUserRegisteration({
                 name: this.form.name,
                 email: this.form.email,
                 password: this.form.password,
                 password_confirmation: this.form.confirmPassword,
+                invitation_code: this.form.inviteCode
             }).then(
                 (response) => success(this.$navigateTo(App))
             );
