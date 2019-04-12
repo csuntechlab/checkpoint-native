@@ -1,6 +1,10 @@
 //Instance imports
 import Vue from 'nativescript-vue';
+
+//NPM based global imports
 import localstorage from 'nativescript-localstorage';
+import Vuelidate from 'vuelidate'
+
 //Font imports
 import { TNSFontIcon, fonticon } from 'nativescript-fonticon';
 TNSFontIcon.paths = {
@@ -29,6 +33,7 @@ TNSFontIcon.debug = false;
 new Vue({
     store,
     localstorage,
+    Vuelidate,
     axios,
     created() {
         store.dispatch('getUserTokenFromLocalStorage');

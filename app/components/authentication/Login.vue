@@ -44,7 +44,9 @@ export default {
         email() {
             return this.form.email = this.user.email;
         },
-       
+    },
+    validations: {
+        required,
     },
     watch: {
         user_token(token){
@@ -68,12 +70,12 @@ export default {
         ]),
 
         submit() {
-            if (!this.form.email || !this.form.password) {
-                this.alert(
-                    "Please provide both an email address and password."
-                );
-                return;
-            } 
+            // if (!this.form.email || !this.form.password) {
+            //     this.alert(
+            //         "Please provide both an email address and password."
+            //     );
+            //     return;
+            // } 
 
             this.postUserLogin({
                 username: this.form.email,
