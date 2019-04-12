@@ -82,12 +82,13 @@ export default {
             // if (!this.form.email || !this.form.password) {
             //     
             // }
-            if (this.$v.form.$pending || this.$v.form.$error){
-                this.alert(
-                    "does it works? it works huh"
-                );
-                return;
-            }
+            console.log(this.$v);
+            // if (this.form.email.$error){
+            //     this.alert(
+            //         "does it works? it works"
+            //     );
+            //     return;
+            // }
 
 
             this.postUserLogin({

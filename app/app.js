@@ -3,7 +3,7 @@ import Vue from 'nativescript-vue';
 
 //NPM based global imports
 import localstorage from 'nativescript-localstorage';
-import Vuelidate from 'vuelidate'
+import Vuelidate from 'nativescript-nodeify/node_modules/vuelidate';
 
 //Font imports
 import { TNSFontIcon, fonticon } from 'nativescript-fonticon';
@@ -27,6 +27,7 @@ import App from "./components/App";
 // DEVTOOLS CONFIGURATION
 import VueDevtools from 'nativescript-vue-devtools';
 Vue.use(VueDevtools)
+
 Vue.config.silent = true;
 TNSFontIcon.debug = false;
 
@@ -36,6 +37,7 @@ new Vue({
     Vuelidate,
     axios,
     created() {
+        console.log(this.$v);
         store.dispatch('getUserTokenFromLocalStorage');
         store.dispatch('setStatusFromLocalStorage');
     },
