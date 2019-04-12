@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@progress-nativechat/nativescript-nativechat": "2.0.3",
-    "@vue/devtools": "^5.0.0-beta.3",
+    "@vue/devtools": "^5.0.9",
     "axios": "^0.18.0",
     "kinvey-nativescript-sdk": "3.12.3",
     "nativescript-accelerometer": "2.0.1",
@@ -28,6 +28,7 @@
     "nativescript-intl": "3.0.0",
     "nativescript-iqkeyboardmanager": "1.3.0",
     "nativescript-localstorage": "^2.0.0",
+    "nativescript-nodeify": "^0.8.0",
     "nativescript-social-share": "1.5.1",
     "nativescript-socketio": "^3.2.1",
     "nativescript-theme-core": "1.0.4",

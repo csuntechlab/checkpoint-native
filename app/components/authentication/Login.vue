@@ -25,6 +25,7 @@
 </template>
 <script>
 import App from '../App';
+import { required, maxLength, email } from 'vuelidate/lib/validators'
 import { mapGetters, mapActions } from 'Vuex';
 
 export default {
@@ -46,7 +47,15 @@ export default {
         },
     },
     validations: {
-        required,
+        form: {
+            email: {
+                required,
+                email
+            },
+            password: {
+                required
+            }
+        },
     },
     watch: {
         user_token(token){
