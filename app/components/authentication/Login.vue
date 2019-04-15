@@ -82,7 +82,7 @@ export default {
             // if (!this.form.email || !this.form.password) {
             //     
             // }
-            console.log(this.$v);
+            console.log(this);
             // if (this.form.email.$error){
             //     this.alert(
             //         "does it works? it works"
