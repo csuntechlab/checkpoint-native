@@ -41,6 +41,7 @@ new Vue({
         store.dispatch('getUserTokenFromLocalStorage');
         store.dispatch('setStatusFromLocalStorage');
     },
+    validations: {},
     render: h => h('frame', [h(store.getters.user_token ? App : Index)])
 }).$start();
 

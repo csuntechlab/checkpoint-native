@@ -18,6 +18,8 @@
                 <TextField ref="password" class="input" hint="Password" secure="true" v-model="form.password" :returnKeyType="'next'"
                 fontSize="18" />
                 <StackLayout class="hr-light" />
+                <StackLayout class="hr-red" />
+
             </StackLayout>
 
             <StackLayout class="input-field" marginBottom="20">
@@ -27,7 +29,7 @@
             </StackLayout>
 
             <StackLayout class="input-field">
-                <TextField class="input" hint="Authentication Code" autocorrect="false" autocapitalizationType="none" v-model="form.email"
+                <TextField class="input" hint="Authentication Code" autocorrect="false" autocapitalizationType="none" v-model="form.inviteCode"
                     returnKeyType="next" fontSize="18" />
                 <StackLayout class="hr-light" />
             </StackLayout>
@@ -45,6 +47,8 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'Vuex';
+import { required, minLength, maxLength, email, alpha, numeric, sameAs} from 'vuelidate/lib/validators';
+
 export default {
     data() {
         return {
@@ -57,6 +61,33 @@ export default {
             }
         };
     },
+     validations: {
+        form: {
+            name:{
+                required,
+                alpha,
+                minLength: minLength(1)
+            },
+            email: {
+                required,
+                email
+            },
+            password: {
+                required,
+                minLength: minLength(6)
+            },
+            confirmPassword: {
+                required,
+                sameAsPassword: sameAs('password')
+
+            },
+            inviteCode: {
+                required,
+                numeric,
+                maxLength: maxLength(6)
+            }
+        },
+    },
 
     methods: {
         ...mapActions([
@@ -65,28 +96,29 @@ export default {
         ]),
         
         register() {
-            if (this.form.password != this.form.confirmPassword) {
-                this.alert("Your passwords do not match.");
-                return;
-            }
-            if (!this.form.email || !this.form.password) {
-                this.alert(
-                    "Please provide both an email address and password."
-                );
-                return;
-            }
-            if (this.form.password.length < 6){
-                this.alert(
-                    "Password is under 6 characters.  Please enter a longer password."
-                );
-                return;
-            }
-            if (this.form.activationCode.length != 6){
-                this.alert(
-                    "Not a valid Activation Code"
-                );
-                return;
-            }
+            this.$v.$touch();
+            // if (this.form.password != this.form.confirmPassword) {
+            //     this.alert("Your passwords do not match.");
+            //     return;
+            // }
+            // if (!this.form.email || !this.form.password) {
+            //     this.alert(
+            //         "Please provide both an email address and password."
+            //     );
+            //     return;
+            // }
+            // if (this.form.password.length < 6){
+            //     this.alert(
+            //         "Password is under 6 characters.  Please enter a longer password."
+            //     );
+            //     return;
+            // }
+            // if (this.form.activationCode.length != 6){
+            //     this.alert(
+            //         "Not a valid Activation Code"
+            //     );
+            //     return;
+            // }
             this.postUserRegisteration({
                 name: this.form.name,
                 email: this.form.email,

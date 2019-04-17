@@ -25,7 +25,7 @@
 </template>
 <script>
 import App from '../App';
-import { required, maxLength, email } from 'vuelidate/lib/validators'
+import { required, maxLength, email } from 'vuelidate/lib/validators';
 import { mapGetters, mapActions } from 'Vuex';
 
 export default {
@@ -79,22 +79,18 @@ export default {
         ]),
 
         submit() {
-            // if (!this.form.email || !this.form.password) {
-            //     
-            // }
-            console.log(this);
-            // if (this.form.email.$error){
-            //     this.alert(
-            //         "does it works? it works"
-            //     );
-            //     return;
-            // }
-
-
-            this.postUserLogin({
-                username: this.form.email,
-                password: this.form.password
-            });
+            this.$v.$touch();
+            if (this.$v.form.$error){
+                this.alert(
+                    "ERRORRR! ERRROR!!! EORRROROROR!!!!!!!!!!!!!!!"
+                );
+                return;
+            } else {
+                this.postUserLogin({
+                    username: this.form.email,
+                    password: this.form.password
+                });
+            }
         },
         alert(message) {
             return alert({
