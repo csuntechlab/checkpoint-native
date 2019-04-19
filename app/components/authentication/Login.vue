@@ -82,7 +82,7 @@ export default {
             this.$v.$touch();
             if (this.$v.form.$error){
                 this.alert(
-                    "ERRORRR! ERRROR!!! EORRROROROR!!!!!!!!!!!!!!!"
+                    "There is an error in your form and saving styling for error to a later task."
                 );
                 return;
             } else {

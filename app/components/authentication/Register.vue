@@ -18,8 +18,6 @@
                 <TextField ref="password" class="input" hint="Password" secure="true" v-model="form.password" :returnKeyType="'next'"
                 fontSize="18" />
                 <StackLayout class="hr-light" />
-                <StackLayout class="hr-red" />
-
             </StackLayout>
 
             <StackLayout class="input-field" marginBottom="20">
@@ -97,37 +95,22 @@ export default {
         
         register() {
             this.$v.$touch();
-            // if (this.form.password != this.form.confirmPassword) {
-            //     this.alert("Your passwords do not match.");
-            //     return;
-            // }
-            // if (!this.form.email || !this.form.password) {
-            //     this.alert(
-            //         "Please provide both an email address and password."
-            //     );
-            //     return;
-            // }
-            // if (this.form.password.length < 6){
-            //     this.alert(
-            //         "Password is under 6 characters.  Please enter a longer password."
-            //     );
-            //     return;
-            // }
-            // if (this.form.activationCode.length != 6){
-            //     this.alert(
-            //         "Not a valid Activation Code"
-            //     );
-            //     return;
-            // }
-            this.postUserRegisteration({
-                name: this.form.name,
-                email: this.form.email,
-                password: this.form.password,
-                password_confirmation: this.form.confirmPassword,
-                invitation_code: this.form.inviteCode
-            }).then(
-                (response) => success(this.$navigateTo(App))
-            );
+            if (this.$v.form.$error){
+                this.alert(
+                    "There is an error in your form and saving styling for error to a later task."
+                );
+                return;
+            } else {
+                this.postUserRegisteration({
+                    name: this.form.name,
+                    email: this.form.email,
+                    password: this.form.password,
+                    password_confirmation: this.form.confirmPassword,
+                    invitation_code: this.form.inviteCode
+                }).then(
+                    (response) => success(this.$navigateTo(App))
+                );
+            }
         },
 
         focusConfirmPassword() {
