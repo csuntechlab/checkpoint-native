@@ -6,10 +6,11 @@ const postUserClockInAPI = (payload, success, error) => {
         date: payload.date,
         time: payload.time
       };
-    axios.API.post(`api/clock/in`, data)
+    axios.API.post(`/api/clock/in`, data)
     .then(
-        response => success(response),
-        response => error(response),
+        // response => success(response),
+        response => console.log("fishyy " + JSON.stringify(response)),
+        // response => error(response),
     ); 
 };
 
