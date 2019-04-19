@@ -44,7 +44,7 @@ export default {
           date: dateString,
           time: timeString,
           // logUuid: 'dd92d6e0-4a7c-11e9-b514-bf2bbb65bba2',
-          logUuid: this.user_log.log_id
+          logId: this.user_log.log_id
         })
       } else {
          this.postUserClockIn({
