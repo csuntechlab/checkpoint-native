@@ -1,9 +1,10 @@
 import axios from './config';
 
 const postUserClockInAPI = (payload, success, error) => {
-    console.log(payload.timeStamp);
+    console.log(payload.date);
     const data = {
-        timeStamp: payload.timeStamp,
+        date: payload.date,
+        time: payload.time
       };
     axios.API.post(`api/clock/in`, data)
     .then(
@@ -14,8 +15,9 @@ const postUserClockInAPI = (payload, success, error) => {
 
 const postUserClockOutAPI = (payload, success, error) => {
     const data = {
-        timeStamp: payload.timeStamp,
-        logUuid: payload.logUuid
+        date: payload.date,
+        time: payload.time,
+        logId: payload.logUuid
     };
     axios.API.post(`api/clock/out`, data)
     .then(

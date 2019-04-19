@@ -28,25 +28,28 @@ export default {
   methods: {
     ...mapActions(['postUserClockIn', 'postUserClockOut']),
     clock(){
-      var date = new Date();
+      var today = new Date();
       var dateString =
-      date.getUTCFullYear() + "/" +
-      ("0" + (date.getUTCMonth()+1)).slice(-2) + "/" +
-      ("0" + date.getUTCDate()).slice(-2) + " " +
-      ("0" + date.getUTCHours()).slice(-2) + ":" +
-      ("0" + date.getUTCMinutes()).slice(-2) + ":" +
-      ("0" + date.getUTCSeconds()).slice(-2);
+      today.getUTCFullYear() + "-" +
+      ("0" + (today.getUTCMonth()+1)).slice(-2) + "-" +
+      ("0" + today.getUTCDate()).slice(-2);
+      var timeString = 
+      ("0" + today.getUTCHours()).slice(-2) + ":" +
+      ("0" + today.getUTCMinutes()).slice(-2) + ":" +
+      ("0" + today.getUTCSeconds()).slice(-2);
       console.log("THIS IS THE STATUS IN THE HOME COMPONENT: " + this.user_log.log_id);
       console.log("what is in my phone " + localStorage.getItem('Log_uuid'));
       if(this.user_log.status){
         this.postUserClockOut({
-          timeStamp: dateString,
+          date: dateString,
+          time: timeString,
           // logUuid: 'dd92d6e0-4a7c-11e9-b514-bf2bbb65bba2',
           logUuid: this.user_log.log_id
         })
       } else {
          this.postUserClockIn({
-          timeStamp: dateString,
+          date: dateString,
+          time: timeString,
           auth_token: this.user_token,
         })
       }

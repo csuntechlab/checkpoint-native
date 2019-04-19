@@ -8,7 +8,7 @@ export default {
         Time.postUserClockInAPI(
             payload,
             (success) => {
-                context.commit(_timestamp.CLOCK_IN, success);
+                context.commit(_timestamp.CLOCK_IN, payload);
                 context.commit(_timestamp.STORE_LOG_UUID, success.data.log_uuid);
             },
             (error) => console.log("Clock-in error in actions " + error),
@@ -18,7 +18,7 @@ export default {
         Time.postUserClockOutAPI (
             payload,
             (success) => {
-                context.commit(_timestamp.CLOCK_OUT, success.data.message_success);
+                context.commit(_timestamp.CLOCK_OUT, payload);
             },
 
             (error) => console.log("Clock-out error in actions " + error),
