@@ -20,9 +20,15 @@
                 <StackLayout class="hr-light" />
             </StackLayout>
 
-            <StackLayout class="input-field">
+            <StackLayout class="input-field" marginBottom="20">
                 <TextField ref="confirmPassword" class="input" hint="Confirm password" secure="true" v-model="form.confirmPassword" returnKeyType="done"
                     fontSize="18" />
+                <StackLayout class="hr-light" />
+            </StackLayout>
+
+            <StackLayout class="input-field">
+                <TextField class="input" hint="Authentication Code" autocorrect="false" autocapitalizationType="none" v-model="form.inviteCode"
+                    returnKeyType="next" fontSize="18" />
                 <StackLayout class="hr-light" />
             </StackLayout>
 
@@ -39,6 +45,8 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'Vuex';
+import { required, minLength, maxLength, email, alpha, numeric, sameAs} from 'vuelidate/lib/validators';
+
 export default {
     data() {
         return {
@@ -46,9 +54,37 @@ export default {
                 name: "",
                 email: "",
                 password: "",
-                confirmPassword: ""
+                confirmPassword: "",
+                inviteCode: ""
             }
         };
+    },
+     validations: {
+        form: {
+            name:{
+                required,
+                alpha,
+                minLength: minLength(1)
+            },
+            email: {
+                required,
+                email
+            },
+            password: {
+                required,
+                minLength: minLength(6)
+            },
+            confirmPassword: {
+                required,
+                sameAsPassword: sameAs('password')
+
+            },
+            inviteCode: {
+                required,
+                numeric,
+                maxLength: maxLength(6)
+            }
+        },
     },
 
     methods: {
@@ -58,30 +94,23 @@ export default {
         ]),
         
         register() {
-            if (this.form.password != this.form.confirmPassword) {
-                this.alert("Your passwords do not match.");
-                return;
-            }
-            if (!this.form.email || !this.form.password) {
+            this.$v.$touch();
+            if (this.$v.form.$error){
                 this.alert(
-                    "Please provide both an email address and password."
+                    "There is an error in your form and saving styling for error to a later task."
                 );
                 return;
-            }
-            if (this.form.password.length < 6){
-                this.alert(
-                    "Password is under 6 characters.  Please enter a longer password."
+            } else {
+                this.postUserRegisteration({
+                    name: this.form.name,
+                    email: this.form.email,
+                    password: this.form.password,
+                    password_confirmation: this.form.confirmPassword,
+                    invitation_code: this.form.inviteCode
+                }).then(
+                    (response) => success(this.$navigateTo(App))
                 );
-                return;
             }
-            this.postUserRegisteration({
-                name: this.form.name,
-                email: this.form.email,
-                password: this.form.password,
-                password_confirmation: this.form.confirmPassword,
-            }).then(
-                (response) => success(this.$navigateTo(App))
-            );
         },
 
         focusConfirmPassword() {

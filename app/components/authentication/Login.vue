@@ -25,6 +25,7 @@
 </template>
 <script>
 import App from '../App';
+import { required, maxLength, email } from 'vuelidate/lib/validators';
 import { mapGetters, mapActions } from 'Vuex';
 
 export default {
@@ -44,7 +45,17 @@ export default {
         email() {
             return this.form.email = this.user.email;
         },
-       
+    },
+    validations: {
+        form: {
+            email: {
+                required,
+                email
+            },
+            password: {
+                required
+            }
+        },
     },
     watch: {
         user_token(token){
@@ -68,17 +79,18 @@ export default {
         ]),
 
         submit() {
-            if (!this.form.email || !this.form.password) {
+            this.$v.$touch();
+            if (this.$v.form.$error){
                 this.alert(
-                    "Please provide both an email address and password."
+                    "There is an error in your form and saving styling for error to a later task."
                 );
                 return;
-            } 
-
-            this.postUserLogin({
-                username: this.form.email,
-                password: this.form.password
-            });
+            } else {
+                this.postUserLogin({
+                    username: this.form.email,
+                    password: this.form.password
+                });
+            }
         },
         alert(message) {
             return alert({
