@@ -3,6 +3,8 @@ import axios from 'axios';
 const API  = axios.create({
     //axios configs
     baseURL: 'https://www.sandbox.csun.edu/metalab/dev/checkpoint/'
+    // baseURL: 'http://localhost:8080'
+
 
 })
 
