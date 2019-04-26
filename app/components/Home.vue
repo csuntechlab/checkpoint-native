@@ -21,10 +21,12 @@
 <script src="http://localhost:8098"></script>
 <script>
 import { mapGetters, mapActions } from 'Vuex';
+import * as Geolocation from "nativescript-geolocation";
+
 export default {
   computed: {
     ...mapGetters(['user_log','user', 'user_token']),
-	},
+  },
   methods: {
     ...mapActions(['postUserClockIn', 'postUserClockOut']),
     clock(){
@@ -53,10 +55,31 @@ export default {
           auth_token: this.user_token,
         })
       }
- 
-
     },
+  },
+  
+  created() {
 
+    Geolocation.enableLocationRequest(true)
+        .then(() => {
+            Geolocation.isEnabled().then(isLocationEnabled => {
+                console.log('result is '+isLocationEnabled);
+                if(!isLocationEnabled) {
+                    // potentially do more then just end here...
+                    return;
+                }
+
+                // MUST pass empty object!!
+                Geolocation.getCurrentLocation({})
+                .then(result => {
+                    console.log('loc result', result);
+
+                })
+                .catch(e => {
+                    console.log('loc error', e);
+                });
+            });
+        });
   }
 };
 </script>

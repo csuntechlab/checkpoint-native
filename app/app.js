@@ -33,8 +33,9 @@ TNSFontIcon.debug = false;
 import Vuelidate from 'vuelidate';
 Vue.use(Vuelidate);
 
+
 new Vue({
-    store,
+    store, 
     localstorage,
     axios,
     created() {
