@@ -3,7 +3,7 @@ import _authentication from '../../mutation-types/authentication';
 //AUTH APIS
 import Auth from '../../../api/authentication';
 
-import { TNSFancyAlert, TNSFancyAlertButton } from "nativescript-fancyalert";
+import { TNSFancyAlert } from "nativescript-fancyalert";
 
 export default {
     postUserLogin (context, payload) {
@@ -12,7 +12,6 @@ export default {
             (success) => {
                 context.commit(_authentication.LOGIN_USER, success.data.access_token);
                 context.commit(_authentication.STORE_USER_TOKEN, success.data.access_token);
-                TNSFancyAlert.showSuccess("Login Success");
             },
             (error) => TNSFancyAlert.showError("Login Failed", error),
         );
@@ -23,7 +22,6 @@ export default {
             (success) => {
                 context.commit(_authentication.USER_REGISTRATION, success);
                 context.dispatch('postUserLogin', { username: payload.email, password: payload.password });
-                TNSFancyAlert.showSuccess("Registration Success");
             },
             (error) => TNSFancyAlert.showError("Registration Failed", error),
         );
@@ -32,8 +30,8 @@ export default {
         Auth.postUserLogoutAPI(
              "Bearer " + context.getters.user_token,
             () => {
+                localStorage.removeItem('Auth_Token');
                 context.commit(_authentication.USER_LOGOUT);
-                TNSFancyAlert.showSuccess("Logout Success");
             },
             (error) => TNSFancyAlert.showError("Logout Failed", error),
         );

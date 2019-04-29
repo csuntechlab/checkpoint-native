@@ -11,7 +11,7 @@ export default {
                 context.commit(_timestamp.CLOCK_IN, payload);
                 context.commit(_timestamp.STORE_LOG_UUID, success.data.log_uuid);
             },
-            (error) => console.log("Clock-in error in actions " + error),
+            (error) => TNSFancyAlert.showError("Clock In Failed", error),
         );
     },
     postUserClockOut (context, payload) {
@@ -21,7 +21,7 @@ export default {
                 context.commit(_timestamp.CLOCK_OUT, payload);
             },
 
-            (error) => console.log("Clock-out error in actions " + error),
+            (error) => TNSFancyAlert.showError("Clock Out Failed", error),
         );
     },
     setStatusFromLocalStorage (context) {
