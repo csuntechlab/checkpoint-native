@@ -20,7 +20,7 @@ import store from './Store';
 import axios from './api';
 
 //Main components
-import Index from './components/authentication/Index';
+import Auth from './components/authentication/Index';
 import App from "./components/App";
 
 // DEVTOOLS CONFIGURATION
@@ -42,6 +42,6 @@ new Vue({
         store.dispatch('setStatusFromLocalStorage');
     },
     validations: {},
-    render: h => h('frame', [h(store.getters.user_token ? App : Index)])
+    render: h => h('frame', [h(store.getters.user_token ? App : Auth)])
 }).$start();
 

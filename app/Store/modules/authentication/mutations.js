@@ -7,14 +7,13 @@ export default {
     },
 
     [_authentication.USER_REGISTRATION] (state, payload){
-        state.user.name = payload.data.name,
-        state.user.email = payload.data.email
+        state.user.name = payload.data.name;
+        state.user.email = payload.data.email;
     },
 
     [_authentication.USER_LOGOUT] (state){
-        state.user.name = null,
-        state.user.email = null,
-        localStorage.removeItem('Auth_Token');
+        state.user.name = null;
+        state.user.email = null;
     },
     [_authentication.SET_USER_TOKEN] (state, payload){
         state.user_token = payload;
