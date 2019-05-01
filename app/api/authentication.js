@@ -9,7 +9,7 @@ const postUserLoginAPI = (payload, success, error) => {
     axios.API.post(`api/login`, data)
     .then(
         response => success(response),    
-        response=> error(response)
+        response => error(response)
     );
 };
 const postUserRegisterationAPI = (payload, success, error) => {

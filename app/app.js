@@ -39,6 +39,7 @@ new Vue({
     localstorage,
     axios,
     created() {
+        store.dispatch('getUserLocationValidaton');
         store.dispatch('getUserTokenFromLocalStorage');
         store.dispatch('setStatusFromLocalStorage');
     },

@@ -1,6 +1,7 @@
 <template>
 <GridLayout :backgroundColor="user_log.status == false ? 'gray' : 'aqua'"  columns="*" rows="*,*">
-  <Button @tap="clock" class="clock" :text="user_log.status == false ? 'Clock In' : 'Clock Out'"/>
+  <!-- <Button @tap="clock" class="clock" :text="user_log.status == false ? 'Clock In' : 'Clock Out'"/> -->
+  <Button @tap="location" class="clock" text="TEST"/>
 
   <GridLayout backgroundColor="white" col="0" row="1" columns="*,*,*" rows="*,*">
     <Label text="Clock In" col="0" row="0" textAlignment="center"/>
@@ -21,7 +22,9 @@
 <script src="http://localhost:8098"></script>
 <script>
 import { mapGetters, mapActions } from 'Vuex';
-import * as Geolocation from "nativescript-geolocation";
+import  * as Geolocation from "nativescript-geolocation";
+import { Accuracy } from'ui/enums';
+
 
 export default {
   computed: {
@@ -56,31 +59,33 @@ export default {
         })
       }
     },
+
+    location (){
+      // var Geolocation = require('nativescript-geolocation');
+      // Geolocation.enableLocationRequest();
+      // Geolocation.enableLocationRequest().then(res => {console.log(res);});
+      var loc1;
+      var loc2;
+      var location = Geolocation.getCurrentLocation({desiredAccuracy: Accuracy.high})
+      .then(res => {
+        console.log(res);        
+        console.log("checking " + JSON.stringify(Geolocation.distance(res, {latitude: 34.241511, longitude: -118.536259})))
+        // Geolocation.distance(res, {latitude: 39, longitude: -113});
+        // console.log("checking " + answer);	
+      })
+        // console.log("checking " + JSON.stringify(Geolocation.distance(loc1, loc2)))
+            // console.log(location);
+            // console.log(Geolocation);
+            // console.log("testtting " + JSON.stringify(Geolocation.isEnabled()));
+
+      // if(!Geolocation.isEnabled()) {
+      //       Geolocation.enableLocationRequest(true);
+      // } else {
+      //   console.log(JSON.stringify(Geolocation));
+      // }
+      // Geolocation.enableLocationRequest(false);
+    }
   },
-  
-  created() {
-
-    Geolocation.enableLocationRequest(true)
-        .then(() => {
-            Geolocation.isEnabled().then(isLocationEnabled => {
-                console.log('result is '+isLocationEnabled);
-                if(!isLocationEnabled) {
-                    // potentially do more then just end here...
-                    return;
-                }
-
-                // MUST pass empty object!!
-                Geolocation.getCurrentLocation({})
-                .then(result => {
-                    console.log('loc result', result);
-
-                })
-                .catch(e => {
-                    console.log('loc error', e);
-                });
-            });
-        });
-  }
 };
 </script>
 <style scoped>
