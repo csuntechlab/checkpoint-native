@@ -14,7 +14,7 @@ API.isCancel = axios.isCancel;
 
 //Axios token check
 API.interceptors.request.use(
-    (config) => {
+(config) => {
         let token = localStorage.getItem('Auth_Token');
 
         if(token){

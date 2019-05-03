@@ -60,24 +60,16 @@ export default {
     watch: {
         user_token(token){
             if(token !==  null){
-                this.$navigateTo(App,
-                {
-                    clearHistory: true
-                }
-                )
-                
+                this.$navigateTo(App, { clearHistory: true });
             }
         }
     },
-
     methods: {
         ...mapActions([
             'postUserLogin',
             'loginUser',
             'routeToAuthentication',
-
         ]),
-
         submit() {
             this.$v.$touch();
             if (this.$v.form.$error){

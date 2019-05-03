@@ -3,6 +3,7 @@ import _authentication from '../../mutation-types/authentication';
 //AUTH APIS
 import Auth from '../../../api/authentication';
 
+import { TNSFancyAlert } from "nativescript-fancyalert";
 
 export default {
     postUserLogin (context, payload) {
@@ -12,7 +13,7 @@ export default {
                 context.commit(_authentication.LOGIN_USER, success.data.access_token);
                 context.commit(_authentication.STORE_USER_TOKEN, success.data.access_token);
             },
-            (error) => console.log("Login error in actions " + error),
+            (error) => TNSFancyAlert.showError("Login Failed", error),
         );
     },
     postUserRegisteration(context, payload){
@@ -20,22 +21,19 @@ export default {
             payload,
             (success) => {
                 context.commit(_authentication.USER_REGISTRATION, success);
-                context.dispatch('postUserLogin',
-                {
-                    username: payload.email,
-                    password: payload.password
-                })
+                context.dispatch('postUserLogin', { username: payload.email, password: payload.password });
             },
-            (error) => console.log("Registration error in actions " + error),
+            (error) => TNSFancyAlert.showError("Registration Failed", error),
         );
     },
     postUserLogout(context){
         Auth.postUserLogoutAPI(
              "Bearer " + context.getters.user_token,
             () => {
-                context.commit(_authentication.USER_LOGOUT)
+                localStorage.removeItem('Auth_Token');
+                context.commit(_authentication.USER_LOGOUT);
             },
-            (error) => console.log("Logout error in actions " + error),
+            (error) => TNSFancyAlert.showError("Logout Failed", error),
         );
     },
     getUserTokenFromLocalStorage(context) {
