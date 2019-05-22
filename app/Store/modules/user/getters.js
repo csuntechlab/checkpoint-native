@@ -1,5 +1,5 @@
 //USER GETTERS
 export default {
-  user_token: state => state.user_token,
-  user: state => state.user
+  user_profile: state => state.user_profile,
+  locations: state => state.locations
 };

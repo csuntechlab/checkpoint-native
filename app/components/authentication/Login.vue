@@ -78,6 +78,7 @@ export default {
                 );
                 return;
             } else {
+                console.log("I just submitted in login ");
                 this.postUserLogin({
                     username: this.form.email,
                     password: this.form.password

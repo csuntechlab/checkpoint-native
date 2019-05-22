@@ -1,9 +1,9 @@
 //CLOCK STATE
 
 export default{
-    user_log: {
+    clock_log: {
         status: false,
-        log_id: localStorage.getItem('Log_uuid'),
+        log_id: null,
         time_in: [],
         time_out: [],
         approved_locations:[],

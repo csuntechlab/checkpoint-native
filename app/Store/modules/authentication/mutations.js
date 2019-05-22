@@ -14,6 +14,7 @@ export default {
     [_authentication.USER_LOGOUT] (state){
         state.user.name = null;
         state.user.email = null;
+        state.user_token = null;
     },
     [_authentication.SET_USER_TOKEN] (state, payload){
         state.user_token = payload;

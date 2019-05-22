@@ -1,7 +1,9 @@
 import authentication from './authentication';
-import timestamp from './timestamp';
+import clock from './clock';
+import user from './user'
 
 export default {
   authentication,
-  timestamp
+  clock,
+  user
 };

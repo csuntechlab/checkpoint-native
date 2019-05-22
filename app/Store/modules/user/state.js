@@ -1,5 +1,6 @@
 //USER STATE
 
 export default {
-  user_profile: null,
+  user_profile: {},
+  locations: [],
 };
