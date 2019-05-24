@@ -33,15 +33,24 @@ TNSFontIcon.debug = false;
 import Vuelidate from 'vuelidate';
 Vue.use(Vuelidate);
 
+
 new Vue({
-    store,
-    localstorage,
-    axios,
-    created() {
-        store.dispatch('getUserTokenFromLocalStorage');
-        store.dispatch('setStatusFromLocalStorage');
-    },
-    validations: {},
-    render: h => h('frame', [h(store.getters.user_token ? App : Auth)])
+  store,
+  localstorage,
+  axios,
+  created() {
+    store.dispatch("getUserTokenFromLocalStorage");
+    store.dispatch("setInitialClockStatus");
+  },
+  validations: {},
+  render: h =>
+    h("frame", [
+      h(
+        store.getters.user_token === "undefined" ||
+        store.getters.user_token == null ||
+        store.getters.user_token.length <= 0
+        ? Auth : App
+      )
+    ])
 }).$start();
 

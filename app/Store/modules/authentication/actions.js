@@ -10,6 +10,7 @@ export default {
         Auth.postUserLoginAPI(
             payload,
             (success) => {
+                console.log(JSON.stringify(success));
                 context.commit(_authentication.LOGIN_USER, success.data.access_token);
                 context.commit(_authentication.STORE_USER_TOKEN, success.data.access_token);
             },
@@ -31,6 +32,7 @@ export default {
              "Bearer " + context.getters.user_token,
             () => {
                 localStorage.removeItem('Auth_Token');
+                localStorage.clear();
                 context.commit(_authentication.USER_LOGOUT);
             },
             (error) => TNSFancyAlert.showError("Logout Failed", error),
